@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ title }} • Velora</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f6f3ff;
+            color: #26213a;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            width: 100%;
+            background: white;
+            border-bottom: 1px solid #e8e3f3;
+            padding: 16px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            color: #7657d9;
+            text-decoration: none;
+        }
+
+        .home-btn {
+            text-decoration: none;
+            color: #5e4a9e;
+            font-weight: 600;
+            padding: 9px 15px;
+            border-radius: 10px;
+            background: #f0ebff;
+        }
+
+        .home-btn:hover {
+            background: #e4dcff;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            margin: 35px auto;
+            padding: 0 18px;
+        }
+
+        .back {
+            display: inline-block;
+            text-decoration: none;
+            color: #7657d9;
+            font-weight: 600;
+            margin-bottom: 18px;
+        }
+
+        .page-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(80, 60, 120, 0.08);
+        }
+
+        .title {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #8a8499;
+            margin-bottom: 25px;
+        }
+
+        /* =========================
+           USER CARD
+        ========================= */
+
+        .user-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 16px;
+            border: 1px solid #eeeaf6;
+            border-radius: 15px;
+            margin-bottom: 12px;
+            transition: 0.2s;
+        }
+
+        .user-card:hover {
+            background: #faf8ff;
+            transform: translateY(-1px);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            min-width: 0;
+        }
+
+        /* =========================
+           AVATAR
+        ========================= */
+
+        .avatar {
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #9b82ee, #6d52c9);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .username {
+            color: #28223b;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 17px;
+            word-break: break-word;
+        }
+
+        .username:hover {
+            color: #7657d9;
+        }
+
+        .small-text {
+            color: #9892a5;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        /* =========================
+           FOLLOW BUTTON
+        ========================= */
+
+        .follow-form {
+            margin: 0;
+        }
+
+        .follow-btn {
+            border: none;
+            cursor: pointer;
+            padding: 9px 17px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+
+        .follow {
+            background: #7657d9;
+            color: white;
+        }
+
+        .follow:hover {
+            background: #6546c7;
+        }
+
+        .following {
+            background: #eeeaf9;
+            color: #66559a;
+        }
+
+        .following:hover {
+            background: #e2ddf1;
+        }
+
+        /* =========================
+           EMPTY
+        ========================= */
+
+        .empty {
+            text-align: center;
+            padding: 45px 15px;
+            color: #8d879b;
+        }
+
+        .empty-icon {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        .empty h3 {
+            color: #514a60;
+            margin-bottom: 7px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 14px 18px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .container {
+                margin: 22px auto;
+                padding: 0 12px;
+            }
+
+            .page-card {
+                padding: 18px;
+                border-radius: 16px;
+            }
+
+            .title {
+                font-size: 23px;
+            }
+
+            .user-card {
+                padding: 13px;
+            }
+
+            .avatar {
+                width: 46px;
+                height: 46px;
+                min-width: 46px;
+                font-size: 17px;
+            }
+
+            .username {
+                font-size: 15px;
+            }
+
+            .follow-btn {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 400px) {
+
+            .user-card {
+                gap: 8px;
+            }
+
+            .user-info {
+                gap: 9px;
+            }
+
+            .follow-btn {
+                padding: 7px 9px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+
+        <a href="{% url 'home' %}" class="logo">
+            Velora
+        </a>
+
+        <a href="{% url 'home' %}" class="home-btn">
+            ← Home
+        </a>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================= -->
+
+    <div class="container">
+
+        <a
+            href="{% url 'profile' username %}"
+            class="back"
+        >
+            ← Back to {{ username }}'s profile
+        </a>
+
+
+        <div class="page-card">
+
+            <!-- TITLE -->
+
+            <div class="title">
+                {{ title }}
+            </div>
+
+            <div class="subtitle">
+                People connected with @{{ username }}
+            </div>
+
+
+            <!-- =========================
+                 USER LIST
+            ========================= -->
+
+            {% if users %}
+
+                {% for item in users %}
+
+                    <div class="user-card">
+
+                        <!-- USER INFO -->
+
+                        <div class="user-info">
+
+                            <div class="avatar">
+                                {{ item.user.username|first|upper }}
+                            </div>
+
+                            <div>
+
+                                <a
+                                    href="{% url 'profile' item.user.username %}"
+                                    class="username"
+                                >
+                                    @{{ item.user.username }}
+                                </a>
+
+                                <div class="small-text">
+                                    View profile
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =========================
+                             FOLLOW / UNFOLLOW
+                        ========================= -->
+
+                        {% if request.user.is_authenticated %}
+
+                            {% if request.user.username != item.user.username %}
+
+                                <form
+                                    method="POST"
+                                    class="follow-form"
+                                >
+
+                                    {% csrf_token %}
+
+                                    <input
+                                        type="hidden"
+                                        name="action"
+                                        value="follow"
+                                    >
+
+                                    <input
+                                        type="hidden"
+                                        name="following"
+                                        value="{{ item.user.username }}"
+                                    >
+
+                                    {% if item.is_followed %}
+
+                                        <button
+                                            type="submit"
+                                            class="follow-btn following"
+                                        >
+                                            ✓ Following
+                                        </button>
+
+                                    {% else %}
+
+                                        <button
+                                            type="submit"
+                                            class="follow-btn follow"
+                                        >
+                                            + Follow
+                                        </button>
+
+                                    {% endif %}
+
+                                </form>
+
+                            {% endif %}
+
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <!-- EMPTY LIST -->
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        👥
+                    </div>
+
+                    <h3>
+                        No users yet
+                    </h3>
+
+                    <p>
+                        There are no {{ title|lower }} to show right now.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</body>
+</html>

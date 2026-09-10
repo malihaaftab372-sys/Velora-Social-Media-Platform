@@ -1,0 +1,1623 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Velora</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f8f7fb;
+            color: #292433;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            height: 70px;
+            background: rgba(255, 255, 255, 0.97);
+            border-bottom: 1px solid #eeeaf4;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 25px;
+            font-weight: bold;
+            color: #704cff;
+        }
+
+        .logo {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 14px;
+
+            background: linear-gradient(
+                135deg,
+                #7c4dff,
+                #d946ef
+            );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+            font-size: 21px;
+            font-weight: bold;
+
+            box-shadow:
+                0 6px 18px rgba(112, 76, 255, 0.22);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-link {
+            color: #625b70;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 9px 12px;
+            border-radius: 10px;
+        }
+
+        .nav-link:hover {
+            color: #704cff;
+            background: #f5f2ff;
+        }
+
+        .nav-user {
+            color: #704cff;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 9px 12px;
+        }
+
+        .logout-btn {
+            border: 1px solid #704cff;
+            background: white;
+            color: #704cff;
+
+            padding: 9px 13px;
+            border-radius: 10px;
+
+            font-size: 13px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background: #704cff;
+            color: white;
+        }
+
+        /* =========================
+           MAIN LAYOUT
+        ========================= */
+
+        .page {
+            max-width: 1250px;
+            margin: 30px auto;
+
+            padding: 0 20px;
+
+            display: grid;
+
+            grid-template-columns: 1fr 330px;
+
+            gap: 28px;
+        }
+
+        /* =========================
+           WELCOME
+        ========================= */
+
+        .welcome {
+            background: linear-gradient(
+                135deg,
+                #ffffff,
+                #faf7ff
+            );
+
+            border: 1px solid #eeeaf4;
+
+            border-radius: 22px;
+
+            padding: 22px;
+
+            margin-bottom: 22px;
+
+            box-shadow:
+                0 8px 30px rgba(42, 27, 66, 0.035);
+        }
+
+        .welcome h1 {
+            font-size: 24px;
+            margin-bottom: 7px;
+        }
+
+        .welcome p {
+            color: #888;
+            font-size: 14px;
+        }
+
+        /* =========================
+           CREATE POST
+        ========================= */
+
+        .create-card {
+            background: white;
+
+            border: 1px solid #eeeaf4;
+
+            border-radius: 22px;
+
+            padding: 22px;
+
+            margin-bottom: 22px;
+
+            box-shadow:
+                0 8px 30px rgba(42, 27, 66, 0.04);
+        }
+
+        .create-title {
+            font-size: 18px;
+            font-weight: bold;
+
+            margin-bottom: 16px;
+        }
+
+        .post-form textarea {
+            width: 100%;
+
+            border: 1px solid #e7e1ee;
+
+            border-radius: 14px;
+
+            padding: 14px 15px;
+
+            outline: none;
+
+            font-size: 14px;
+
+            background: #fcfbfe;
+
+            min-height: 100px;
+
+            resize: vertical;
+        }
+
+        .post-form textarea:focus {
+            border-color: #9b82ff;
+        }
+
+        .post-form-bottom {
+            margin-top: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .posting-as {
+            color: #999;
+            font-size: 12px;
+        }
+
+        .posting-as strong {
+            color: #704cff;
+        }
+
+        .post-btn {
+            border: none;
+
+            background: linear-gradient(
+                135deg,
+                #704cff,
+                #a855f7
+            );
+
+            color: white;
+
+            padding: 11px 23px;
+
+            border-radius: 13px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        .post-btn:hover {
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 6px 15px rgba(112, 76, 255, 0.22);
+        }
+
+        /* =========================
+           POST CARD
+        ========================= */
+
+        .post-card {
+            background: white;
+
+            border: 1px solid #eeeaf4;
+
+            border-radius: 22px;
+
+            padding: 20px;
+
+            margin-bottom: 20px;
+
+            box-shadow:
+                0 8px 30px rgba(42, 27, 66, 0.035);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+
+            gap: 11px;
+        }
+
+        .avatar-link {
+            text-decoration: none;
+        }
+
+        .post-avatar {
+            width: 46px;
+            height: 46px;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #c4b5fd,
+                #f9a8d4
+            );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            font-weight: bold;
+
+            font-size: 18px;
+        }
+
+        .post-user {
+            font-size: 15px;
+        }
+
+        .profile-link {
+            color: #292433;
+            font-weight: bold;
+        }
+
+        .profile-link:hover {
+            color: #704cff;
+        }
+
+        .date {
+            color: #999;
+
+            font-size: 11px;
+
+            margin-top: 4px;
+        }
+
+        .post-content {
+            margin-top: 17px;
+
+            color: #514a5c;
+
+            line-height: 1.65;
+
+            font-size: 15px;
+
+            white-space: pre-wrap;
+
+            word-break: break-word;
+        }
+
+        /* =========================
+           ACTIONS
+        ========================= */
+
+        .actions {
+            display: flex;
+            align-items: center;
+
+            gap: 16px;
+
+            margin-top: 18px;
+
+            padding-top: 14px;
+
+            border-top: 1px solid #f1edf5;
+        }
+
+        .action-form {
+            margin: 0;
+        }
+
+        .action-btn {
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            color: #625b70;
+
+            font-size: 14px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 6px;
+
+            padding: 5px;
+        }
+
+        .action-btn:hover {
+            color: #704cff;
+        }
+
+        /* =========================
+           HEART
+        ========================= */
+
+        .heart {
+            font-size: 23px;
+
+            line-height: 1;
+        }
+
+        .heart.liked {
+            color: red;
+        }
+
+        .heart.not-liked {
+            color: white;
+
+            -webkit-text-stroke:
+                1.5px #555;
+        }
+
+        .likes-count {
+            color: #777;
+
+            font-size: 13px;
+
+            margin-top: 10px;
+        }
+
+        /* =========================
+           COMMENTS
+        ========================= */
+
+        .comments {
+            margin-top: 15px;
+
+            padding-top: 14px;
+
+            border-top: 1px solid #f1edf5;
+        }
+
+        .comment {
+            background: #f8f6fb;
+
+            padding: 10px 12px;
+
+            border-radius: 12px;
+
+            margin-bottom: 8px;
+
+            font-size: 13px;
+        }
+
+        .comment strong {
+            color: #40384b;
+        }
+
+        .comment-text {
+            color: #666;
+
+            margin-top: 4px;
+
+            line-height: 1.4;
+        }
+
+        .comment-form {
+            display: flex;
+
+            gap: 8px;
+
+            margin-top: 12px;
+        }
+
+        .comment-form input {
+            flex: 1;
+
+            border: 1px solid #e7e1ee;
+
+            border-radius: 12px;
+
+            padding: 10px 12px;
+
+            outline: none;
+
+            font-size: 13px;
+
+            background: #fcfbfe;
+        }
+
+        .comment-form input:focus {
+            border-color: #9b82ff;
+        }
+
+        .comment-form button {
+            border: none;
+
+            background: #704cff;
+
+            color: white;
+
+            border-radius: 12px;
+
+            padding: 0 15px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        /* =========================
+           SIDEBAR
+        ========================= */
+
+        .sidebar-card {
+            background: white;
+
+            border: 1px solid #eeeaf4;
+
+            border-radius: 22px;
+
+            padding: 20px;
+
+            box-shadow:
+                0 8px 30px rgba(42, 27, 66, 0.035);
+
+            height: fit-content;
+
+            position: sticky;
+
+            top: 95px;
+        }
+
+        .sidebar-title {
+            font-size: 17px;
+
+            margin-bottom: 18px;
+        }
+
+        /* =========================
+           USER SUGGESTION
+        ========================= */
+
+        .suggestion {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 16px;
+        }
+
+        .suggestion-avatar {
+            width: 43px;
+            height: 43px;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #ddd6fe,
+                #fbcfe8
+            );
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            color: #704cff;
+
+            font-weight: bold;
+        }
+
+        .suggestion-info {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+        .suggestion-name {
+            display: block;
+
+            color: #292433;
+
+            font-size: 14px;
+
+            font-weight: bold;
+        }
+
+        .suggestion-name:hover {
+            color: #704cff;
+        }
+
+        .suggestion-bio {
+            color: #999;
+
+            font-size: 11px;
+
+            margin-top: 3px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+        .follow-form {
+            margin: 0;
+        }
+
+        .follow-btn {
+            border: 1px solid #704cff;
+
+            color: #704cff;
+
+            background: white;
+
+            border-radius: 10px;
+
+            padding: 7px 11px;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            white-space: nowrap;
+        }
+
+        .follow-btn:hover {
+            background: #704cff;
+
+            color: white;
+        }
+
+        .following-btn {
+            background: #704cff;
+
+            color: white;
+        }
+
+        .empty-users {
+            color: #999;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+        /* =========================
+           MY PROFILE CARD
+        ========================= */
+
+        .my-profile {
+            background: linear-gradient(
+                135deg,
+                #f7f3ff,
+                #fff5fb
+            );
+
+            border-radius: 17px;
+
+            padding: 15px;
+
+            margin-bottom: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+        }
+
+        .my-profile-avatar {
+            width: 44px;
+            height: 44px;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #704cff,
+                #d946ef
+            );
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+
+            font-size: 17px;
+        }
+
+        .my-profile-info {
+            flex: 1;
+        }
+
+        .my-profile-info strong {
+            display: block;
+
+            font-size: 14px;
+        }
+
+        .my-profile-info span {
+            display: block;
+
+            color: #999;
+
+            font-size: 11px;
+
+            margin-top: 3px;
+        }
+
+        .view-profile {
+            color: #704cff;
+
+            font-size: 11px;
+
+            font-weight: bold;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            text-align: center;
+
+            color: #aaa;
+
+            font-size: 11px;
+
+            padding: 20px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .page {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-card {
+                position: static;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .brand {
+                font-size: 21px;
+            }
+
+            .logo {
+                width: 37px;
+                height: 37px;
+            }
+
+            .nav-right {
+                gap: 3px;
+            }
+
+            .nav-link {
+                padding: 7px;
+            }
+
+            .nav-user {
+                display: none;
+            }
+
+            .page {
+                margin-top: 18px;
+
+                padding: 0 12px;
+            }
+
+            .post-card,
+            .create-card,
+            .sidebar-card,
+            .welcome {
+                border-radius: 17px;
+            }
+
+            .actions {
+                gap: 9px;
+            }
+
+            .comment-form {
+                flex-wrap: wrap;
+            }
+
+            .comment-form input {
+                min-width: 100%;
+            }
+
+            .comment-form button {
+                padding: 10px 18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar">
+
+
+    <a href="{% url 'home' %}" class="brand">
+
+        <div class="logo">
+            V
+        </div>
+
+        Velora
+
+    </a>
+
+
+    <div class="nav-right">
+
+
+        <a
+            href="{% url 'home' %}"
+            class="nav-link"
+        >
+            Home
+        </a>
+
+
+        {% if user.is_authenticated %}
+
+
+            <a
+                href="{% url 'profile' user.username %}"
+                class="nav-link"
+            >
+                Profile
+            </a>
+
+
+            <span class="nav-user">
+                @{{ user.username }}
+            </span>
+
+
+            <a
+                href="{% url 'logout' %}"
+                class="logout-btn"
+            >
+                Logout
+            </a>
+
+
+        {% else %}
+
+
+            <a
+                href="{% url 'login' %}"
+                class="nav-link"
+            >
+                Login
+            </a>
+
+
+            <a
+                href="{% url 'signup' %}"
+                class="nav-link"
+            >
+                Sign up
+            </a>
+
+
+        {% endif %}
+
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     MAIN PAGE
+===================================================== -->
+
+<div class="page">
+
+
+    <!-- =================================================
+         FEED
+    ================================================== -->
+
+    <main>
+
+
+        <!-- WELCOME -->
+
+        <div class="welcome">
+
+            <h1>
+                Welcome to Velora ✨
+            </h1>
+
+            <p>
+                Connect, share and discover people.
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             CREATE POST
+        ================================================== -->
+
+        <div class="create-card">
+
+
+            <div class="create-title">
+                Share something ✨
+            </div>
+
+
+            <form
+                method="POST"
+                class="post-form"
+            >
+
+                {% csrf_token %}
+
+
+                <input
+                    type="hidden"
+                    name="action"
+                    value="post"
+                >
+
+
+                <textarea
+                    name="content"
+                    placeholder="What's on your mind, @{{ user.username }}?"
+                    required
+                ></textarea>
+
+
+                <div class="post-form-bottom">
+
+
+                    <div class="posting-as">
+
+                        Posting as
+
+                        <strong>
+                            @{{ user.username }}
+                        </strong>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="post-btn"
+                    >
+                        Post
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             POSTS
+        ================================================== -->
+
+        {% for post in posts %}
+
+
+            <article
+                class="post-card"
+                id="post-{{ post.id }}"
+            >
+
+
+                <!-- POST HEADER -->
+
+                <div class="post-header">
+
+
+                    <a
+                        href="{% url 'profile' post.username %}"
+                        class="avatar-link"
+                    >
+
+                        <div class="post-avatar">
+
+                            {{ post.username|first|upper }}
+
+                        </div>
+
+                    </a>
+
+
+                    <div>
+
+
+                        <div class="post-user">
+
+                            <a
+                                href="{% url 'profile' post.username %}"
+                                class="profile-link"
+                            >
+
+                                @{{ post.username }}
+
+                            </a>
+
+                        </div>
+
+
+                        <div class="date">
+
+                            {{ post.created_at|date:"M d, Y · g:i A" }}
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- POST CONTENT -->
+
+                <div class="post-content">
+
+                    {{ post.content }}
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ACTIONS
+                ================================================== -->
+
+                <div class="actions">
+
+
+                    <!-- LIKE -->
+
+                    <form
+                        method="POST"
+                        class="action-form"
+                    >
+
+                        {% csrf_token %}
+
+
+                        <input
+                            type="hidden"
+                            name="action"
+                            value="like"
+                        >
+
+
+                        <input
+                            type="hidden"
+                            name="post_id"
+                            value="{{ post.id }}"
+                        >
+
+
+                        <button
+                            type="submit"
+                            class="action-btn"
+                        >
+
+
+                            {% if post.is_liked %}
+
+                                <span class="heart liked">
+                                    ♥
+                                </span>
+
+                            {% else %}
+
+                                <span class="heart not-liked">
+                                    ♥
+                                </span>
+
+                            {% endif %}
+
+
+                            <span>
+                                Like
+                            </span>
+
+
+                        </button>
+
+
+                    </form>
+
+
+
+                    <!-- COMMENT -->
+
+                    <button
+                        type="button"
+                        class="action-btn"
+                        onclick="toggleComments('{{ post.id }}')"
+                    >
+
+                        💬 Comment
+
+                    </button>
+
+
+
+                    <!-- SHARE -->
+
+                    <button
+                        type="button"
+                        class="action-btn"
+                        onclick="sharePost('{{ post.id }}')"
+                    >
+
+                        ↗ Share
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- LIKE COUNT -->
+
+                <div class="likes-count">
+
+                    ❤️ {{ post.likes }} likes
+
+                </div>
+
+
+
+                <!-- =================================================
+                     COMMENTS
+                ================================================== -->
+
+                <div
+                    class="comments"
+                    id="comments-{{ post.id }}"
+                    style="display:none;"
+                >
+
+
+                    {% for comment in post.comments.all %}
+
+
+                        <div class="comment">
+
+
+                            <a
+                                href="{% url 'profile' comment.username %}"
+                                style="text-decoration:none;"
+                            >
+
+                                <strong>
+                                    @{{ comment.username }}
+                                </strong>
+
+                            </a>
+
+
+                            <div class="comment-text">
+
+                                {{ comment.content }}
+
+                            </div>
+
+
+                        </div>
+
+
+                    {% empty %}
+
+
+                        <div
+                            style="
+                                color:#aaa;
+                                font-size:12px;
+                                margin-bottom:10px;
+                            "
+                        >
+
+                            No comments yet.
+
+                        </div>
+
+
+                    {% endfor %}
+
+
+
+                    <!-- COMMENT FORM -->
+
+                    <form
+                        method="POST"
+                        class="comment-form"
+                    >
+
+                        {% csrf_token %}
+
+
+                        <input
+                            type="hidden"
+                            name="action"
+                            value="comment"
+                        >
+
+
+                        <input
+                            type="hidden"
+                            name="post_id"
+                            value="{{ post.id }}"
+                        >
+
+
+                        <input
+                            type="text"
+                            name="content"
+                            placeholder="Write a comment..."
+                            required
+                        >
+
+
+                        <button type="submit">
+                            Send
+                        </button>
+
+
+                    </form>
+
+
+                </div>
+
+
+            </article>
+
+
+        {% empty %}
+
+
+            <div class="create-card">
+
+                <p
+                    style="
+                        color:#999;
+                        text-align:center;
+                        padding:20px;
+                    "
+                >
+
+                    No posts yet.
+
+                    <br>
+
+                    Be the first to share something ✨
+
+                </p>
+
+            </div>
+
+
+        {% endfor %}
+
+
+    </main>
+
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside>
+
+
+        <div class="sidebar-card">
+
+
+            <!-- MY PROFILE -->
+
+            <div class="my-profile">
+
+
+                <div class="my-profile-avatar">
+
+                    {{ user.username|first|upper }}
+
+                </div>
+
+
+                <div class="my-profile-info">
+
+                    <strong>
+                        @{{ user.username }}
+                    </strong>
+
+                    <span>
+                        Your Velora account
+                    </span>
+
+                </div>
+
+
+                <a
+                    href="{% url 'profile' user.username %}"
+                    class="view-profile"
+                >
+
+                    View
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- SUGGESTIONS -->
+
+            <h2 class="sidebar-title">
+
+                Suggested for you
+
+            </h2>
+
+
+            {% for suggested in suggested_users %}
+
+
+                <div class="suggestion">
+
+
+                    <!-- AVATAR -->
+
+                    <a
+                        href="{% url 'profile' suggested.name %}"
+                        class="avatar-link"
+                    >
+
+                        <div class="suggestion-avatar">
+
+                            {{ suggested.name|first|upper }}
+
+                        </div>
+
+                    </a>
+
+
+
+                    <!-- USER INFO -->
+
+                    <div class="suggestion-info">
+
+
+                        <a
+                            href="{% url 'profile' suggested.name %}"
+                            class="suggestion-name"
+                        >
+
+                            @{{ suggested.name }}
+
+                        </a>
+
+
+                        <div class="suggestion-bio">
+
+                            {{ suggested.bio }}
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- FOLLOW -->
+
+                    <form
+                        method="POST"
+                        class="follow-form"
+                    >
+
+                        {% csrf_token %}
+
+
+                        <input
+                            type="hidden"
+                            name="action"
+                            value="follow"
+                        >
+
+
+                        <input
+                            type="hidden"
+                            name="following"
+                            value="{{ suggested.name }}"
+                        >
+
+
+                        {% if suggested.is_followed %}
+
+
+                            <button
+                                type="submit"
+                                class="follow-btn following-btn"
+                            >
+
+                                Following
+
+                            </button>
+
+
+                        {% else %}
+
+
+                            <button
+                                type="submit"
+                                class="follow-btn"
+                            >
+
+                                Follow
+
+                            </button>
+
+
+                        {% endif %}
+
+
+                    </form>
+
+
+                </div>
+
+
+            {% empty %}
+
+
+                <div class="empty-users">
+
+                    No other users yet.
+
+                    <br><br>
+
+                    Create another account to see users here.
+
+                </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+    </aside>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<div class="footer">
+
+    Velora ✨ Connect. Share. Discover.
+
+</div>
+
+
+
+<script>
+
+
+    /* =====================================================
+       TOGGLE COMMENTS
+    ===================================================== */
+
+    function toggleComments(postId) {
+
+        const comments =
+            document.getElementById(
+                "comments-" + postId
+            );
+
+
+        if (!comments) {
+            return;
+        }
+
+
+        if (
+            comments.style.display === "none"
+            ||
+            comments.style.display === ""
+        ) {
+
+            comments.style.display = "block";
+
+        } else {
+
+            comments.style.display = "none";
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       SHARE POST
+    ===================================================== */
+
+    function sharePost(postId) {
+
+        const url =
+            window.location.origin
+            +
+            window.location.pathname
+            +
+            "#post-"
+            +
+            postId;
+
+
+        if (
+            navigator.clipboard
+            &&
+            navigator.clipboard.writeText
+        ) {
+
+
+            navigator.clipboard
+                .writeText(url)
+                .then(function () {
+
+                    alert(
+                        "Post link copied! ✨"
+                    );
+
+                })
+                .catch(function () {
+
+                    alert(
+                        "Share link: " + url
+                    );
+
+                });
+
+
+        } else {
+
+            alert(
+                "Share link: " + url
+            );
+
+        }
+
+    }
+
+
+</script>
+
+
+</body>
+
+</html>
