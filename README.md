@@ -88,7 +88,5 @@ http://127.0.0.1:8000/
 ```
 
 ## 👩‍💻 Developer
-
 **Maliha Aftab**
-
-GitHub: @malihaaftab372-sys
+GitHub: https://github.com/malihaaftab372-sys
